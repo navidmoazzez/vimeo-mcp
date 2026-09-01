@@ -1,38 +1,59 @@
+<div align="center">
+  <img src="https://cdn.navid.media/shared/tool-logos/vimeo.png" alt="Vimeo" width="88">
+</div>
+
 # Vimeo MCP
 
-Give your AI assistant real access to your Vimeo library: videos, folders, showcases, chapters, transcripts, comments, tags, privacy and embed presets.
+[![Stars](https://img.shields.io/github/stars/navidmoazzez/vimeo-mcp?style=flat&logo=github&label=Stars)](https://github.com/navidmoazzez/vimeo-mcp)
+[![License](https://img.shields.io/badge/License-MIT-blue)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@thenavidm/vimeo-mcp?color=orange&label=npm)](https://www.npmjs.com/package/@thenavidm/vimeo-mcp)
+[![Downloads](https://img.shields.io/npm/dm/@thenavidm/vimeo-mcp?color=green&label=downloads)](https://www.npmjs.com/package/@thenavidm/vimeo-mcp)
+[![CI](https://img.shields.io/github/actions/workflow/status/navidmoazzez/vimeo-mcp/ci.yml?branch=main&label=CI)](https://github.com/navidmoazzez/vimeo-mcp/actions)
+[![YouTube](https://img.shields.io/badge/YouTube-@thenavidm-red?logo=youtube&logoColor=white)](https://youtube.com/@thenavidm?sub_confirmation=1)
+[![X](https://img.shields.io/badge/X-@thenavidm-black?logo=x)](https://x.com/thenavidm)
+
+Vimeo MCP connects your video library to Claude, Cursor, and any other AI agent.
+It reads transcripts, files videos into folders in bulk, curates showcases,
+writes chapters and captions, and manages tags, privacy and embed presets.
+
+There are 43 tools, and the bulk folder operations are the point of them. Vimeo
+moves videos between folders one at a time, so refiling a back catalogue of
+hundreds is hundreds of drags. Here it is one call that takes up to 100 videos.
 
 ```
-You:    Which videos in my library have no chapters and run over 30 minutes?
+You:    Which videos over 30 minutes have no chapters?
 
-Claude: Six. The longest is "AI Affiliate Marketing Secrets Workshop" at 1h 4m.
-        I read its transcript and drafted ten chapter markers. Want them added?
+Claude: [list_videos → list_chapters]
+        Six. The longest is "AI Affiliate Marketing Secrets" at 1h 4m.
+        I read its transcript and drafted ten markers. Add them?
 
-You:    Yes, and file all six into the Workshops folder.
+You:    Yes, and file all six into Workshops.
 
-Claude: Added 10 chapters. Moved all six in one call.
+Claude: [add_chapter ×10 → add_videos_to_folder]
+        10 chapters added. All six moved in one call.
 ```
 
 Built by [Navid Moazzez](https://navid.me).
 
-> **Not published to npm yet.**
-> The `npx` lines below are the shape they will take. Until the first release,
-> install from source: clone the repo, `npm install`, `npm run build`, then
-> point your client at `node /absolute/path/to/dist/index.js`.
-
 ## Contents
 
-1. [What you can ask it](#1-what-you-can-ask-it-)
-2. [Quick install](#2-quick-install-)
-3. [Setup](#3-setup-)
-4. [Connect your client](#4-connect-your-client-)
-5. [Check it worked](#5-check-it-worked-)
-6. [Tools](#6-tools-)
-7. [Writing safely](#7-writing-safely-)
-8. [How Vimeo actually behaves](#8-how-vimeo-actually-behaves-)
-9. [Your data](#9-your-data-)
-10. [Troubleshooting](#10-troubleshooting-)
-11. [FAQ](#faq-)
+| | Section | |
+|---|---|---|
+| 1 | [What you can ask it](#1-what-you-can-ask-it-) | Real prompts, not features |
+| 2 | [Quick install](#2-quick-install-) | Node, one command |
+| 3 | [Setup](#3-setup-) | Getting a token, and the scopes that matter |
+| 4 | [Connect your client](#4-connect-your-client-) | Every client, copy and paste |
+| 5 | [Check it worked](#5-check-it-worked-) | `doctor` |
+| 6 | [Tools](#6-tools-) | All 43 |
+| 7 | [Writing safely](#7-writing-safely-) | What is guarded, what is not |
+| 8 | [How Vimeo actually behaves](#8-how-vimeo-actually-behaves-) | The things that surprise people |
+| 9 | [This and Vimeo's own connector](#9-this-and-vimeos-own-connector-) | Which one you want, and when |
+| 10 | [Your data](#10-your-data-) | What is stored, and where |
+| 11 | [Troubleshooting](#11-troubleshooting-) | Symptom to cause |
+| 12 | [FAQ](#12-faq-) | Start here if you are new |
+| 13 | [What changed](#13-what-changed-) | Every release |
+
+---
 
 ## 1. What you can ask it 💬
 
@@ -47,10 +68,9 @@ Built by [Navid Moazzez](https://navid.me).
 - "Pull the download link for the original file of video 1096473192."
 - "Which of my videos have no tags?"
 
-The one that is impossible without this: **filing a back catalogue.** Vimeo's own
-tools move videos between folders one at a time. `add_videos_to_folder` takes up
-to 100 ids in a single call, so reorganising a library of hundreds of videos is
-one request rather than hundreds.
+The one that is impossible without this is filing a back catalogue.
+`add_videos_to_folder` takes up to 100 ids in a single call, so reorganising a
+library of hundreds of videos is one request rather than hundreds of drags.
 
 ## 2. Quick install ⚡
 
@@ -67,12 +87,14 @@ update later.
 
 You need a Vimeo personal access token.
 
-**Read this before you generate one.** A token's scopes are fixed the moment it
-is created and cannot be changed afterwards. If you miss a box, the only fix is
-to generate a new token. The two people most often miss:
+Read this before you generate one. A token's scopes are fixed the moment it is
+created and cannot be changed afterwards. If you miss a box, the only fix is to
+generate a new token. Two are off by default and are the ones people miss:
 
-- **`delete`** is off by default. Without it every delete tool fails.
-- **`video_files`** is off by default. Without it you cannot get download links.
+| Scope | Without it |
+|---|---|
+| `delete` | Every delete tool fails, with an error that never mentions scopes |
+| `video_files` | Download links come back empty, so original files are unreachable |
 
 ### Have an agent do it
 
@@ -95,18 +117,17 @@ Help me set up the Vimeo MCP server.
 
 1. Go to <https://developer.vimeo.com/apps> and sign in.
 2. Create an app, or open one you already have.
-3. Open the app's **Authentication** section.
-4. Find the personal access token area and generate a new token.
-5. Tick the scopes you want. `public`, `private`, `edit`, `create`, `interact`
-   and `upload` cover everyday use. Add `delete` if you want the delete tools
-   and `video_files` if you want download links. `stats` only does something on
-   a paid plan.
+3. Open the app's Authentication section.
+4. Generate a personal access token.
+5. Tick the scopes. `public`, `private`, `edit`, `create`, `interact` and
+   `upload` cover everyday use. Add `delete` for the delete tools and
+   `video_files` for download links. `stats` only does something on a paid plan.
 6. Copy the token immediately. Vimeo shows it once.
 
 ### To revoke it
 
-Go back to the same Authentication section and delete the token. It stops
-working at once, everywhere it is configured.
+Same Authentication section, delete the token. It stops working at once,
+everywhere it is configured.
 
 ## 4. Connect your client 🔌
 
@@ -155,8 +176,8 @@ npx -y @thenavidm/vimeo-mcp@latest --http --port 8000
 ```
 
 Host that behind a public HTTPS URL, set `VIMEO_HTTP_TOKEN` to a secret of your
-choosing, then in claude.ai go to **Customize**, **Connectors**, **+**,
-**Add custom connector**, and paste the URL.
+choosing, then in claude.ai go to Customize, Connectors, +, Add custom
+connector, and paste the URL.
 
 ### Cursor
 
@@ -168,8 +189,8 @@ choosing, then in claude.ai go to **Customize**, **Connectors**, **+**,
 
 ### VS Code
 
-`.vscode/mcp.json`. The key is **`servers`**, not `mcpServers`, and each entry
-takes `"type": "stdio"`.
+`.vscode/mcp.json`. The key is `servers`, not `mcpServers`, and each entry takes
+`"type": "stdio"`.
 
 ### Codex CLI
 
@@ -196,17 +217,17 @@ and the env block.
 ## 5. Check it worked 🩺
 
 ```bash
-npx -y @thenavidm/vimeo-mcp@latest doctor
+VIMEO_PAT=your_token npx -y @thenavidm/vimeo-mcp@latest doctor
 ```
 
-It prints the account, the plan, every scope the token holds, and a list of any
-tools that will fail because a scope is missing. Both of the things that
-actually go wrong show up here.
+It prints the account, the plan, every scope the token holds, and names any tool
+that a missing scope disables. Both of the things that actually go wrong show up
+here.
 
 ## 6. Tools 🛠️
 
-43 tools. 17 of them are reads, and those are the only ones that remain when
-`VIMEO_READ_ONLY=1` is set.
+43 tools. 17 are reads, and those are the only ones that remain under
+`VIMEO_READ_ONLY=1`.
 
 ### Videos
 
@@ -230,8 +251,8 @@ actually go wrong show up here.
 | `create_folder` | Needs `create` |
 | `update_folder` | Rename |
 | `delete_folder` | Needs `delete`, confirms |
-| `add_videos_to_folder` | **Up to 100 videos in one call** |
-| `remove_videos_from_folder` | **Up to 100 in one call.** Unfiles by default |
+| `add_videos_to_folder` | Up to 100 videos in one call |
+| `remove_videos_from_folder` | Up to 100 in one call. Unfiles by default |
 
 ### Showcases
 
@@ -241,7 +262,7 @@ actually go wrong show up here.
 | `get_showcase` | One showcase and its videos in curated order |
 | `create_showcase` | Needs `create` |
 | `update_showcase` | Name, description, privacy, sort order |
-| `delete_showcase` | Needs `delete`, confirms. Videos survive |
+| `delete_showcase` | Needs `delete`, confirms. The videos survive |
 | `add_video_to_showcase` | Adds a reference, does not move the video |
 | `remove_video_from_showcase` | Removes the reference only |
 
@@ -251,7 +272,7 @@ actually go wrong show up here.
 |---|---|
 | `list_chapters` | Chapters in timecode order |
 | `add_chapter` | Add a marker at a timecode |
-| `update_chapter` | Retitle or move it |
+| `update_chapter` | Retitle it or move it |
 | `delete_chapter` | Needs `delete`, confirms |
 
 ### Captions and transcripts
@@ -279,7 +300,7 @@ actually go wrong show up here.
 |---|---|
 | `get_me` | Account, plan, storage and the token's scopes |
 | `get_video_stats` | Lifetime plays, comments and likes. Every plan |
-| `get_video_analytics` | Views over time and finish rate. **Paid plans only** |
+| `get_video_analytics` | Views over time and finish rate. Paid plans only |
 | `set_video_tags` | Replace a video's tags |
 | `get_video_privacy` | Who can watch and embed, plus the domain whitelist |
 | `allow_embed_domain` | Allow one domain to embed |
@@ -288,12 +309,12 @@ actually go wrong show up here.
 
 ## 7. Writing safely ✍️
 
-Writes work by default. Publishing and organising is the point of the tool.
+Writes work by default. Organising a library is the point of the tool.
 
 Seven tools refuse to run without `confirm: true`: the six deletes, and
 `add_comment`, because a comment is visible to everyone who can see the video
 the moment it posts. Nothing else is gated, because moving a video between
-folders or editing a title is one call to undo, and asking to confirm everything
+folders or editing a title is one call to undo, and confirming everything
 teaches a model to confirm reflexively.
 
 Two flags deserve their own mention. `delete_videos_too` on `delete_folder` and
@@ -312,15 +333,12 @@ default to false and both route through the confirm path when set.
 | Reversible writes | false | false | true |
 | Deletes and comments | false | true | false |
 
-**On prompt injection.** Comment text is written by other people and can contain
-instructions aimed at whatever reads it. Every comment comes back wrapped and
-labelled as viewer-authored data, which helps and is not a guarantee. For an
-agent working unattended on other people's content, `VIMEO_READ_ONLY=1` is the
-real defence.
+Comment text is written by other people and can contain instructions aimed at
+whatever reads it. Every comment comes back wrapped and labelled as
+viewer-authored data, which helps and is not a guarantee. For an agent working
+unattended on other people's content, `VIMEO_READ_ONLY=1` is the real defence.
 
 ## 8. How Vimeo actually behaves 🎬
-
-The things that surprise people, learned the hard way.
 
 **Scopes are frozen at creation.** A token cannot gain a scope later. `delete`
 and `video_files` are both off by default, and Vimeo's 403 does not name the
@@ -339,13 +357,13 @@ it there moves nothing.
 
 **Vimeo expands nested objects in full.** Asking for a video's `parent_folder`
 returns the folder, its owner, that owner's avatar in nine sizes and their
-upload quota, which is about two kilobytes to learn a folder name. This server
-always requests specific leaf fields, which is why its output is small.
+upload quota, about two kilobytes to learn a folder name. This server always
+requests specific leaf fields, which is why its output is small.
 
 **The bulk endpoints are inconsistent.** Folder add and remove take the video
 list as a `uris` query parameter. The showcase bulk endpoint takes a `videos`
-body field, and it *replaces* the showcase contents rather than appending, which
-is why this server does not expose it: adding to a showcase goes one video at a
+body field and it replaces the showcase contents rather than appending, which is
+why this server does not expose it: adding to a showcase goes one video at a
 time so a curated list cannot be wiped by accident.
 
 **Transcripts are two requests.** The API returns caption metadata with a link,
@@ -356,20 +374,53 @@ it cannot be cached or handed to someone to open later.
 while transcoding continues. Watch `status` on `get_video` until it reads
 `available`.
 
-## 9. Your data 📂
+## 9. This and Vimeo's own connector ⚖️
+
+Vimeo publishes its own hosted MCP connector at `mcp.vimeo.com`. It is good, it
+is free with a Pro plan, and for a lot of people it is the right choice. Here is
+the honest split, so you can pick rather than guess.
+
+**Use Vimeo's** if you want analytics or their AI features. It has viewer
+retention curves and retention insights, AI video summaries, semantic search
+inside a video, teams, staff picks, and an editing and render pipeline. None of
+that is reachable through the public API, so nothing here can match it.
+
+**Use this one** if you want to change your library rather than read it.
+
+| | This | Vimeo's |
+|---|---|---|
+| Runs | Locally, your own token | Hosted by Vimeo, OAuth |
+| Plan needed | Any, including free | Pro or above |
+| Delete videos | Yes, guarded | No, blocked by design |
+| Upload videos | Yes | No upload tool |
+| Create and rename folders | Yes | Read only |
+| Move videos between folders | Yes, 100 per call | No |
+| Showcase create, edit, delete | Yes | Create and update only |
+| Chapters | Add, edit, delete | Add and read |
+| Captions | Upload, edit, delete | Read |
+| Comments | Post, edit, delete | Read |
+| Tags, embed presets, domain whitelist | Yes | No |
+| Original file downloads | Yes, with `video_files` | No |
+| Viewer retention analytics | No | Yes |
+| AI summaries, moment search, editing | No | Yes |
+
+They are not rivals and nothing stops you running both. Theirs answers what
+happened to a video. This one changes what the library looks like.
+
+## 10. Your data 📂
 
 There is no backend. This server runs on your machine and talks to
 `api.vimeo.com` directly.
 
 It stores nothing. No session file, no cache, no database. The only file it ever
 writes is the audit log, and only when you set `VIMEO_AUDIT_LOG` to a path. That
-file contains a timestamp, a tool name and a one-line summary per attempted
-write, and it is created with `0600` permissions.
+file holds a timestamp, a tool name and a one-line summary per attempted write,
+and it is created with `0600` permissions.
 
 Your token lives wherever you put it, which is your MCP client's config file.
 Nothing else is transmitted anywhere.
 
-## 10. Troubleshooting 🔧
+## 11. Troubleshooting 🔧
 
 Run `doctor` first. It catches most of this.
 
@@ -384,7 +435,7 @@ Run `doctor` first. It catches most of this.
 | `npx` not found in Claude Desktop | Desktop does not inherit your shell PATH. Use the full path from `which npx` |
 | Rate limited on a bulk job | Raise `VIMEO_MIN_REQUEST_INTERVAL_MS`, and pass whole lists rather than looping |
 
-## FAQ ❓
+## 12. FAQ ❓
 
 <details>
 <summary><b>What is an MCP server?</b></summary>
@@ -398,10 +449,10 @@ works in Claude, Cursor, ChatGPT and anything else that speaks MCP.
 <details>
 <summary><b>What is Vimeo?</b></summary>
 
-A video hosting platform. People use it for work that needs to look
-professional and stay private: course content, client work, internal training,
-webinars. Unlike a public video site, you control exactly who can watch each
-video and which sites are allowed to embed it.
+A video hosting platform. People use it for work that needs to look professional
+and stay private: course content, client work, internal training, webinars.
+Unlike a public video site, you control exactly who can watch each video and
+which sites are allowed to embed it.
 
 </details>
 
@@ -409,8 +460,8 @@ video and which sites are allowed to embed it.
 <summary><b>Do I need to be technical to use this?</b></summary>
 
 You need to paste a token into a config file once. The setup section has a
-prompt you can hand to an agent that will do the config part for you. After
-that you talk to it in plain language.
+prompt you can hand to an agent that will do the config part for you. After that
+you talk to it in plain language.
 
 </details>
 
@@ -438,7 +489,7 @@ something the Vimeo API allows.
 
 Deleting is guarded twice. Six tools cannot run without `confirm: true`:
 `delete_video`, `delete_folder`, `delete_showcase`, `delete_chapter`,
-`delete_texttrack` and `delete_comment`. On top of that, most tokens do not have
+`delete_texttrack` and `delete_comment`. On top of that, most tokens do not hold
 the `delete` scope, so those tools fail outright unless you deliberately ticked
 that box.
 
@@ -446,6 +497,22 @@ The one to watch is `delete_videos_too`, an option on `delete_folder` and
 `remove_videos_from_folder` that destroys videos instead of unfiling them. It
 defaults to false and needs a confirm when set. If you want no risk at all, run
 with `VIMEO_READ_ONLY=1`.
+
+</details>
+
+<details>
+<summary><b>Vimeo has its own MCP connector. Why use this one?</b></summary>
+
+Different jobs. Vimeo's is hosted, needs a Pro plan, and is built for reading:
+viewer retention, AI summaries, moment search and their editing pipeline. It
+deliberately cannot delete anything, cannot upload, and cannot write to folders.
+
+This one runs locally on any plan including free, and is built for changing a
+library: uploading, deleting, moving videos between folders in bulk, writing
+chapters and captions, managing tags and embed presets.
+
+If you want to know how a video performed, use theirs. If you want to reorganise
+a library, use this. Running both is fine. Section 9 has the full table.
 
 </details>
 
@@ -488,10 +555,14 @@ fail with an authentication error, run `doctor`.
 
 Remove the server from your MCP client's config, then delete the token in your
 app's Authentication section at developer.vimeo.com. The second step matters:
-removing the config stops this server using it, but revoking it stops anything
+removing the config stops this server using it, revoking it stops anything
 using it.
 
 </details>
+
+## 13. What changed 📋
+
+Every release is in [VERSIONS.md](./VERSIONS.md), newest first.
 
 ## Questions
 
@@ -500,7 +571,7 @@ Run into a problem or have a question?
 
 ## About the author
 
-Navid Moazzez is a leading AI business strategist and the host of the AI Creator Summit, watched by 100,000+ creators. He helps creators and founders master AI and build their own AI Operating System (AI OS) to automate their business and life. This MCP server is one piece of that system.
+Navid Moazzez is a leading AI business strategist, and the host of the AI Creator Summit, watched by 100,000+ creators. He helps creators and founders master AI and build their own AI Operating System (AI OS) to automate their business and life. This MCP server is one piece of that system.
 
 **Links**
 
@@ -521,6 +592,10 @@ Navid Moazzez is a leading AI business strategist and the host of the AI Creator
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+[MIT](./LICENSE). Free to use, modify, and share.
+
+Not affiliated with, endorsed by, or connected to Vimeo.com, Inc. Vimeo is a trademark of Vimeo.com, Inc.
+
+---
 
 © 2026 NM Media. Made with ❤️ by [Navid Moazzez](https://navid.me).
