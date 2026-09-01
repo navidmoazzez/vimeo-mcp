@@ -4,10 +4,8 @@
 
 # Vimeo MCP
 
-[![Stars](https://img.shields.io/github/stars/navidmoazzez/vimeo-mcp?style=flat&logo=github&label=Stars)](https://github.com/navidmoazzez/vimeo-mcp)
 [![License](https://img.shields.io/badge/License-MIT-blue)](./LICENSE)
 [![npm](https://img.shields.io/npm/v/@thenavidm/vimeo-mcp?color=orange&label=npm)](https://www.npmjs.com/package/@thenavidm/vimeo-mcp)
-[![Downloads](https://img.shields.io/npm/dm/@thenavidm/vimeo-mcp?color=green&label=downloads)](https://www.npmjs.com/package/@thenavidm/vimeo-mcp)
 [![CI](https://img.shields.io/github/actions/workflow/status/navidmoazzez/vimeo-mcp/ci.yml?branch=main&label=CI)](https://github.com/navidmoazzez/vimeo-mcp/actions)
 [![YouTube](https://img.shields.io/badge/YouTube-@thenavidm-red?logo=youtube&logoColor=white)](https://youtube.com/@thenavidm?sub_confirmation=1)
 [![X](https://img.shields.io/badge/X-@thenavidm-black?logo=x)](https://x.com/thenavidm)
@@ -19,6 +17,8 @@ writes chapters and captions, and manages tags, privacy and embed presets.
 There are 43 tools, and the bulk folder operations are the point of them. Vimeo
 moves videos between folders one at a time, so refiling a back catalogue of
 hundreds is hundreds of drags. Here it is one call that takes up to 100 videos.
+
+Built by [Navid Moazzez](https://navid.me).
 
 ```
 You:    Which videos over 30 minutes have no chapters?
@@ -32,8 +32,6 @@ You:    Yes, and file all six into Workshops.
 Claude: [add_chapter ×10 → add_videos_to_folder]
         10 chapters added. All six moved in one call.
 ```
-
-Built by [Navid Moazzez](https://navid.me).
 
 ## Contents
 
@@ -74,7 +72,7 @@ library of hundreds of videos is one request rather than hundreds of drags.
 
 ## 2. Quick install ⚡
 
-Node 20 or newer. Nothing else.
+You need Node 20 or newer, and nothing else.
 
 ```bash
 npx -y @thenavidm/vimeo-mcp --version
@@ -126,8 +124,8 @@ Help me set up the Vimeo MCP server.
 
 ### To revoke it
 
-Same Authentication section, delete the token. It stops working at once,
-everywhere it is configured.
+Go back to the same Authentication section and delete the token. It stops
+working at once, everywhere it is configured.
 
 ## 4. Connect your client 🔌
 
@@ -181,20 +179,21 @@ connector, and paste the URL.
 
 ### Cursor
 
-`.cursor/mcp.json`, same JSON shape as Claude Desktop, key `mcpServers`.
+Cursor reads `.cursor/mcp.json`, which takes the same JSON shape as Claude
+Desktop under the key `mcpServers`.
 
 ### Windsurf
 
-`~/.codeium/windsurf/mcp_config.json`, key `mcpServers`.
+Windsurf reads `~/.codeium/windsurf/mcp_config.json` under the key `mcpServers`.
 
 ### VS Code
 
-`.vscode/mcp.json`. The key is `servers`, not `mcpServers`, and each entry takes
-`"type": "stdio"`.
+VS Code reads `.vscode/mcp.json`, where the key is `servers` rather than
+`mcpServers`, and each entry takes `"type": "stdio"`.
 
 ### Codex CLI
 
-`~/.codex/config.toml`:
+Codex CLI reads `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.vimeo]
@@ -207,7 +206,7 @@ VIMEO_PAT = "your_token_here"
 
 ### Gemini CLI
 
-`~/.gemini/settings.json`, key `mcpServers`.
+Gemini CLI reads `~/.gemini/settings.json` under the key `mcpServers`.
 
 ### Everything else
 
@@ -226,8 +225,8 @@ here.
 
 ## 6. Tools 🛠️
 
-43 tools. 17 are reads, and those are the only ones that remain under
-`VIMEO_READ_ONLY=1`.
+There are 43 tools, of which 17 are reads, and those are the only ones that
+remain under `VIMEO_READ_ONLY=1`.
 
 ### Videos
 
@@ -412,7 +411,7 @@ happened to a video. This one changes what the library looks like.
 There is no backend. This server runs on your machine and talks to
 `api.vimeo.com` directly.
 
-It stores nothing. No session file, no cache, no database. The only file it ever
+It stores nothing: there is no session file, no cache and no database. The only file it ever
 writes is the audit log, and only when you set `VIMEO_AUDIT_LOG` to a path. That
 file holds a timestamp, a tool name and a one-line summary per attempted write,
 and it is created with `0600` permissions.
@@ -440,8 +439,8 @@ Run `doctor` first. It catches most of this.
 <details>
 <summary><b>What is an MCP server?</b></summary>
 
-A standard way to give an AI assistant real access to a tool, so it can act
-rather than guess. You install it once, your assistant gains the tools, and it
+An MCP server is a standard way to give an AI assistant real access to a tool,
+so it can act rather than guess. You install it once, your assistant gains the tools, and it
 works in Claude, Cursor, ChatGPT and anything else that speaks MCP.
 
 </details>
@@ -449,8 +448,8 @@ works in Claude, Cursor, ChatGPT and anything else that speaks MCP.
 <details>
 <summary><b>What is Vimeo?</b></summary>
 
-A video hosting platform. People use it for work that needs to look professional
-and stay private: course content, client work, internal training, webinars.
+Vimeo is a video hosting platform. People use it for work that needs to look
+professional and stay private: course content, client work, internal training, webinars.
 Unlike a public video site, you control exactly who can watch each video and
 which sites are allowed to embed it.
 
@@ -477,8 +476,8 @@ governed by that assistant's own privacy terms, not by this server.
 <details>
 <summary><b>What can it do that I cannot do in Vimeo already?</b></summary>
 
-Bulk work, mostly. Filing a hundred videos into folders is one call here and a
-hundred drags in the web app. Reading a transcript and turning it into chapter
+It does bulk work, mostly. Filing a hundred videos into folders is one call here
+and a hundred drags in the web app. Reading a transcript and turning it into chapter
 markers is a normal request here and manual work there. Everything it does is
 something the Vimeo API allows.
 
@@ -503,7 +502,8 @@ with `VIMEO_READ_ONLY=1`.
 <details>
 <summary><b>Vimeo has its own MCP connector. Why use this one?</b></summary>
 
-Different jobs. Vimeo's is hosted, needs a Pro plan, and is built for reading:
+They do different jobs. Vimeo's is hosted, needs a Pro plan, and is built for
+reading:
 viewer retention, AI summaries, moment search and their editing pipeline. It
 deliberately cannot delete anything, cannot upload, and cannot write to folders.
 
@@ -528,16 +528,18 @@ depend on your tier.
 <details>
 <summary><b>Does it work with ChatGPT, Cursor and Codex, or only Claude?</b></summary>
 
-Any client that speaks MCP. Configs for Claude Code, Claude Desktop, claude.ai,
-Cursor, Windsurf, VS Code, Codex CLI and Gemini CLI are all in section 4.
+It works with any client that speaks MCP. Configs for Claude Code, Claude
+Desktop, claude.ai, Cursor, Windsurf, VS Code, Codex CLI and Gemini CLI are all
+in section 4.
 
 </details>
 
 <details>
 <summary><b>Can I connect more than one Vimeo account?</b></summary>
 
-Not in one server instance. A token belongs to one account. To use two, add the
-server twice under different names with a different token in each.
+You cannot do it in one server instance, because a token belongs to one account.
+To use two, add the server twice under different names with a different token in
+each.
 
 </details>
 

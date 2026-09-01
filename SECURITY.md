@@ -36,12 +36,11 @@ holding a password.
 
 ## What it writes
 
-One optional file. When `VIMEO_AUDIT_LOG` is set to a path, each attempted write
-appends one JSON line: a timestamp, the tool name, a one-line summary and
-whether it was allowed or blocked. Created with `0600` permissions. No tool can
-read or edit it.
+It writes one optional file. When `VIMEO_AUDIT_LOG` is set to a path, each
+attempted write appends one JSON line: a timestamp, the tool name, a one-line summary and
+whether it was allowed or blocked. It is created with `0600` permissions, and no tool can read or edit it.
 
-Nothing else is written. No cache, no session file, no database.
+Nothing else is written: there is no cache, no session file and no database.
 
 ## Deliberately not implemented
 
