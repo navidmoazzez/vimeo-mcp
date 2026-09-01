@@ -1,0 +1,59 @@
+{
+  "name": "@thenavidm/vimeo-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Vimeo. 40 tools for videos, folders, showcases, chapters, captions, comments, tags, privacy and embed presets, including bulk folder operations and original file downloads. Works with Claude Code, Claude Desktop, Cursor, Windsurf, and any MCP-compatible client.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "vimeo-mcp": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "license": "MIT",
+  "author": "Navid Moazzez <https://navid.me>",
+  "homepage": "https://navid.me",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navidmoazzez/vimeo-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/navidmoazzez/vimeo-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "vimeo",
+    "vimeo-api",
+    "video",
+    "mcp-server",
+    "claude",
+    "claude-code",
+    "ai-agents",
+    "llm-tools"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "SKILL.md",
+    "LICENSE"
+  ]
+}

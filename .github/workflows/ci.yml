@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor from package.json engines, plus current and next.
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+
+  handshake:
+    # A green test run says the code compiles. This says a real MCP client can
+    # actually talk to it, which is the failure a user would hit first.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Tools list over stdio
+        run: |
+          printf '%s\n%s\n%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1.0.0"}}}' \
+            '{"jsonrpc":"2.0","method":"notifications/initialized"}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            | VIMEO_PAT=ci-placeholder node dist/index.js > out.jsonl
+          node -e "
+            const lines = require('fs').readFileSync('out.jsonl','utf8').trim().split('\n');
+            const listed = lines.map(l => JSON.parse(l)).find(m => m.id === 2);
+            const count = listed?.result?.tools?.length ?? 0;
+            if (count < 40) { console.error('Expected 40+ tools, got ' + count); process.exit(1); }
+            for (const t of listed.result.tools) {
+              if (!t.description) { console.error('Tool without a description: ' + t.name); process.exit(1); }
+            }
+            console.log('Handshake OK, ' + count + ' tools, all described.');
+          "
