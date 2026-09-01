@@ -49,8 +49,6 @@ Claude: [add_chapter ×10 → add_videos_to_folder]
 | 12 | [FAQ](#12-faq-) | Start here if you are new |
 | 13 | [What changed](#13-what-changed-) | Every release |
 
----
-
 ## 1. What you can ask it 💬
 
 - "What's in my Vimeo library, and how much of it is unfiled?"
