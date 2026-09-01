@@ -1,4 +1,4 @@
-<img src="https://cdn.navid.media/shared/tool-logos/vimeo.png" alt="Vimeo" width="88">
+<img src="https://cdn.navid.media/connectors/vimeo-icon.png" alt="Vimeo" width="88">
 
 # Vimeo MCP
 
