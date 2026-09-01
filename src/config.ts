@@ -35,7 +35,7 @@ export type Config = {
   /** API base. Overridable only so tests can point at a fake. */
   baseUrl: string;
   /**
-   * Vimeo pins behaviour to an API version in the Accept header rather than the
+   * Vimeo pins behavior to an API version in the Accept header rather than the
    * URL. Omitting it silently opts into whatever is newest, which is how a
    * working integration breaks without a deploy.
    */

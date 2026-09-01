@@ -4,7 +4,7 @@
  * Three things here are not obvious and each one has bitten this integration:
  *
  * 1. The API version goes in the Accept header, not the URL. Without it Vimeo
- *    serves whatever is current, so an integration can change behaviour with no
+ *    serves whatever is current, so an integration can change behavior with no
  *    deploy on our side.
  *
  * 2. Vimeo is inconsistent about where a payload goes, so this client decides
@@ -197,7 +197,7 @@ export class VimeoClient {
     this.lastRequestAt = Date.now();
   }
 
-  /** One page of a collection, normalised. */
+  /** One page of a collection, normalized. */
   async list<T = unknown>(
     path: string,
     options: RequestOptions = {},

@@ -5,7 +5,7 @@ description: |
   user mentions Vimeo, a video library, a folder or showcase of videos, video
   transcripts or captions, chapter markers, embed presets or player branding,
   video privacy or embed domains, or wants videos uploaded, deleted, tagged,
-  reorganised or filed. Use it for any bulk video work, and any question about
+  reorganized or filed. Use it for any bulk video work, and any question about
   plays or video performance. Use it too when a Vimeo call fails with a
   permission error, a 404 that makes no sense, or a delete that will not run:
   those have specific causes documented here and guessing at them wastes turns.
