@@ -1,6 +1,6 @@
 {
   "name": "@thenavidm/vimeo-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vimeo MCP server for Claude Code and AI agents. 43 tools for videos, folders, showcases, chapters, captions, transcripts, comments, tags, privacy, embed presets, and bulk library operations.",
   "type": "module",
   "main": "./dist/index.js",

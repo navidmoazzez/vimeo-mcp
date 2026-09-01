@@ -57,11 +57,11 @@ Nothing else is written: there is no cache, no session file and no database.
 ## Prompt injection
 
 Comments on a video are written by other people and can contain text aimed at
-whatever reads them, including instructions. "Summarise the comments on this
+whatever reads them, including instructions. "Summarize the comments on this
 video" is a normal request, which makes this a real path rather than a
 theoretical one.
 
-Comment text is wrapped and labelled as viewer-authored data before it reaches
+Comment text is wrapped and labeled as viewer-authored data before it reaches
 the model, and the server's instructions say to treat it as data. That framing
 helps and it is not a guarantee. No framing is.
 

@@ -7,6 +7,13 @@
 | Node | >= 20 | 2026-09-01 |
 | Vimeo API | 3.4 | 2026-09-01 |
 
+## 1.0.3
+
+Finishes the American English pass. The previous commit changed five words and
+left eighteen, so the repo was inconsistent with itself: "License" in one table
+and "Licence" in another, "summarize" in one comment and "summarise" in the
+next. All 22 are converted now, across the docs and the source comments.
+
 ## 1.0.2
 
 `--version` and the MCP handshake reported 1.0.0 on a 1.0.1 install, because

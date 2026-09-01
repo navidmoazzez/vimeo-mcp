@@ -1,7 +1,7 @@
 /**
  * Folder tools, called "projects" in the API and "folders" everywhere in the UI.
  *
- * The bulk pair is the reason this module exists. Filing a back catalogue one
+ * The bulk pair is the reason this module exists. Filing a back catalog one
  * video at a time is a request per video and a rate limit waiting at the end of
  * it. `add_videos_to_folder` does the whole list in one call.
  *
@@ -149,7 +149,7 @@ export function registerFolderTools(ctx: ToolContext): void {
 
   server.tool(
     "add_videos_to_folder",
-    "Add one or many videos to a folder in a single call. This is the efficient way to file a back catalogue: pass the whole list rather than calling once per video. A video lives in one folder at a time, so this moves it rather than copying it.",
+    "Add one or many videos to a folder in a single call. This is the efficient way to file a back catalog: pass the whole list rather than calling once per video. A video lives in one folder at a time, so this moves it rather than copying it.",
     {
       folder_id: z.string().describe("Destination folder id."),
       video_ids: z

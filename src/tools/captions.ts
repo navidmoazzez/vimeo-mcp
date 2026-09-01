@@ -9,7 +9,7 @@
  * handed to the user to open later.
  *
  * The VTT is then parsed down to plain text here, because a model asked to
- * summarise a talk does not need cue numbers and timestamps, and they roughly
+ * summarize a talk does not need cue numbers and timestamps, and they roughly
  * double the token count.
  */
 
@@ -91,7 +91,7 @@ export function registerCaptionTools(ctx: ToolContext): void {
 
   server.tool(
     "get_transcript",
-    "Get a video's transcript as plain readable text. Picks the active track, or the language you name. Returns the words only, with cue numbers and timestamps stripped, which is what you want for summarising or repurposing. Ask for format 'vtt' to keep the timings.",
+    "Get a video's transcript as plain readable text. Picks the active track, or the language you name. Returns the words only, with cue numbers and timestamps stripped, which is what you want for summarizing or repurposing. Ask for format 'vtt' to keep the timings.",
     {
       video_id: z.string().describe("Video id."),
       language: z

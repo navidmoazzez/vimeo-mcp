@@ -244,7 +244,7 @@ export function registerMetaTools(ctx: ToolContext): void {
 
   server.tool(
     "list_embed_presets",
-    "List your saved embed presets, which control player colours, controls and branding.",
+    "List your saved embed presets, which control player colors, controls and branding.",
     { per_page: z.number().int().min(1).max(100).default(25) },
     annotationsFor("read"),
     async ({ per_page }) => {

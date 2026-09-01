@@ -15,7 +15,7 @@ It reads transcripts, files videos into folders in bulk, curates showcases,
 writes chapters and captions, and manages tags, privacy and embed presets.
 
 There are 43 tools, and the bulk folder operations are the point of them. Vimeo
-moves videos between folders one at a time, so refiling a back catalogue of
+moves videos between folders one at a time, so refiling a back catalog of
 hundreds is hundreds of drags. Here it is one call that takes up to 100 videos.
 
 Built by [Navid Moazzez](https://navid.me?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp).
@@ -66,8 +66,8 @@ Claude: [add_chapter ×10 → add_videos_to_folder]
 - "Pull the download link for the original file of video 1096473192."
 - "Which of my videos have no tags?"
 
-The one that is impossible without this is filing a back catalogue.
-`add_videos_to_folder` takes up to 100 ids in a single call, so reorganising a
+The one that is impossible without this is filing a back catalog.
+`add_videos_to_folder` takes up to 100 ids in a single call, so reorganizing a
 library of hundreds of videos is one request rather than hundreds of drags.
 
 ## 2. Quick install ⚡
@@ -308,7 +308,7 @@ remain under `VIMEO_READ_ONLY=1`.
 
 ## 7. Writing safely ✍️
 
-Writes work by default. Organising a library is the point of the tool.
+Writes work by default. Organizing a library is the point of the tool.
 
 Seven tools refuse to run without `confirm: true`: the six deletes, and
 `add_comment`, because a comment is visible to everyone who can see the video
@@ -333,7 +333,7 @@ default to false and both route through the confirm path when set.
 | Deletes and comments | false | true | false |
 
 Comment text is written by other people and can contain instructions aimed at
-whatever reads it. Every comment comes back wrapped and labelled as
+whatever reads it. Every comment comes back wrapped and labeled as
 viewer-authored data, which helps and is not a guarantee. For an agent working
 unattended on other people's content, `VIMEO_READ_ONLY=1` is the real defence.
 
@@ -511,7 +511,7 @@ This one runs locally on any plan including free, and is built for changing a
 library: uploading, deleting, moving videos between folders in bulk, writing
 chapters and captions, managing tags and embed presets.
 
-If you want to know how a video performed, use theirs. If you want to reorganise
+If you want to know how a video performed, use theirs. If you want to reorganize
 a library, use this. Running both is fine. Section 9 has the full table.
 
 </details>
