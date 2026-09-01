@@ -7,6 +7,14 @@
 | Node | >= 20 | 2026-09-01 |
 | Vimeo API | 3.4 | 2026-09-01 |
 
+## 1.0.2
+
+`--version` and the MCP handshake reported 1.0.0 on a 1.0.1 install, because
+the version was hardcoded in `src/server.ts` as well as `package.json` and only
+one of them was bumped. It reads from `package.json` now, so the two cannot
+drift again. The symptom looked like npx serving a stale build, which sent the
+investigation to the wrong place entirely.
+
 ## 1.0.1
 
 `SKILL.md` rewritten for its actual reader. It ships inside the package to tell a

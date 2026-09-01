@@ -8,7 +8,27 @@ import { loadConfig, type Config } from "./config.js";
 import { WriteGuard } from "./safety.js";
 import { registerAllTools } from "./tools/index.js";
 
-export const VERSION = "1.0.0";
+/**
+ * Read from package.json rather than hardcoded.
+ *
+ * A duplicated version string drifts the moment a release bumps one and not the
+ * other, and it drifts silently: `--version` and the MCP handshake both report
+ * the stale number while the package installs correctly, so it looks like npx
+ * served an old build. That cost a real debugging detour on 1.0.1.
+ *
+ * `createRequire` rather than an import, because `rootDir` is `src` and
+ * package.json sits above it, so importing it would change the shape of `dist`.
+ */
+import { createRequire } from "node:module";
+
+export const VERSION: string = (() => {
+  try {
+    const require = createRequire(import.meta.url);
+    return (require("../package.json") as { version?: string }).version ?? "0.0.0";
+  } catch {
+    return "0.0.0";
+  }
+})();
 
 const INSTRUCTIONS = `Tools for a Vimeo account: the video library, folders, showcases, chapters, captions and transcripts, comments, tags, privacy and embed presets.
 

@@ -18,7 +18,7 @@ There are 43 tools, and the bulk folder operations are the point of them. Vimeo
 moves videos between folders one at a time, so refiling a back catalogue of
 hundreds is hundreds of drags. Here it is one call that takes up to 100 videos.
 
-Built by [Navid Moazzez](https://navid.me).
+Built by [Navid Moazzez](https://navid.me?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp).
 
 ```
 You:    Which videos over 30 minutes have no chapters?
@@ -577,9 +577,9 @@ Navid Moazzez is a leading AI business strategist, and the host of the AI Creato
 
 **Links**
 
-- Personal website: [navid.me](https://navid.me)
-- Store: [navid.bio](https://navid.bio)
-- Navid Media: [navid.media](https://navid.media)
+- Personal website: [navid.me](https://navid.me?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp)
+- Store: [navid.bio](https://navid.bio?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp)
+- Navid Media: [navid.media](https://navid.media?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp)
 - YouTube: [@thenavidm](https://youtube.com/@thenavidm?sub_confirmation=1) and [@thenavidai](https://youtube.com/@thenavidai?sub_confirmation=1)
 - X: [@thenavidm](https://x.com/thenavidm)
 - Instagram: [@thenavidm](https://instagram.com/thenavidm)
@@ -600,4 +600,4 @@ Not affiliated with, endorsed by, or connected to Vimeo.com, Inc. Vimeo is a tra
 
 ---
 
-© 2026 NM Media. Made with ❤️ by [Navid Moazzez](https://navid.me).
+© 2026 [NM Media](https://navid.media?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp). Made with ❤️ by [Navid Moazzez](https://navid.me?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp).
