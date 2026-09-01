@@ -7,6 +7,22 @@
 | Node | >= 20 | 2026-09-01 |
 | Vimeo API | 3.4 | 2026-09-01 |
 
+## 1.0.1
+
+`SKILL.md` rewritten for its actual reader. It ships inside the package to tell a
+model how to drive the tools, and the first version explained the platform to a
+human instead: documentation with frontmatter on top. It now routes a question
+to a tool, names the argument shapes that get passed wrong, and says what each
+failure actually means so a model stops retrying a call that cannot succeed.
+
+Its YAML also broke every renderer, because an unquoted `description` containing
+`library: listing` reads as a nested mapping. It is a block scalar now, matching
+the other servers.
+
+README first screenful: the badge row was carrying a stars badge reading 0 and a
+downloads badge rendering red, since a package published minutes earlier has no
+download history. Both are gone. The `Built by` line moved above the transcript.
+
 ## 1.0.0
 
 First release. 43 tools across videos, folders, showcases, chapters, captions
