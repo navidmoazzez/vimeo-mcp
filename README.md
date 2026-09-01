@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="https://cdn.navid.media/shared/tool-logos/vimeo.png" alt="Vimeo" width="88">
-</div>
+<img src="https://cdn.navid.media/shared/tool-logos/vimeo.png" alt="Vimeo" width="88">
 
 # Vimeo MCP
 
