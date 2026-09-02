@@ -561,7 +561,7 @@ using it.
 
 ## 13. What changed 📋
 
-Every release is in [VERSIONS.md](./VERSIONS.md), newest first.
+Every release is in [CHANGELOG.md](./CHANGELOG.md), newest first.
 
 ## Questions
 
