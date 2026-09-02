@@ -41,14 +41,15 @@ Claude: [add_chapter ×10 → add_videos_to_folder]
 | 3 | [Setup](#3-setup-) | Getting a token, and the scopes that matter |
 | 4 | [Connect your client](#4-connect-your-client-) | Every client, copy and paste |
 | 5 | [Check it worked](#5-check-it-worked-) | `doctor` |
-| 6 | [Tools](#6-tools-) | All 43 |
-| 7 | [Writing safely](#7-writing-safely-) | What is guarded, what is not |
-| 8 | [How Vimeo actually behaves](#8-how-vimeo-actually-behaves-) | The things that surprise people |
-| 9 | [This and Vimeo's own connector](#9-this-and-vimeos-own-connector-) | Which one you want, and when |
-| 10 | [Your data](#10-your-data-) | What is stored, and where |
-| 11 | [Troubleshooting](#11-troubleshooting-) | Symptom to cause |
-| 12 | [FAQ](#12-faq-) | Start here if you are new |
-| 13 | [What changed](#13-what-changed-) | Every release |
+| 6 | [What it costs to have connected](#6-what-it-costs-to-have-connected) | Tokens per turn, and how to spend less |
+| 7 | [Tools](#7-tools-) | All 43 |
+| 8 | [Writing safely](#8-writing-safely-) | What is guarded, what is not |
+| 9 | [How Vimeo actually behaves](#9-how-vimeo-actually-behaves-) | The things that surprise people |
+| 10 | [This and Vimeo's own connector](#10-this-and-vimeos-own-connector-) | Which one you want, and when |
+| 11 | [Your data](#11-your-data-) | What is stored, and where |
+| 12 | [Troubleshooting](#12-troubleshooting-) | Symptom to cause |
+| 13 | [FAQ](#13-faq-) | Start here if you are new |
+| 14 | [What changed](#14-what-changed-) | Every release |
 
 ## 1. What you can ask it 💬
 
@@ -222,7 +223,29 @@ It prints the account, the plan, every scope the token holds, and names any tool
 that a missing scope disables. Both of the things that actually go wrong show up
 here.
 
-## 6. Tools 🛠️
+## 6. What it costs to have connected
+
+Every MCP server sends its whole tool list to the model on **every turn**,
+whether you mention it or not. Measured on this one:
+
+| | Sent per turn |
+|---|---|
+| 43 tool definitions, plus the server instructions | **~8,000 tokens** |
+
+That is the price of it being connected at all, before you ask anything. It is
+not unusual, and almost nobody publishes it.
+
+Two ways to spend less.
+
+**Turn it off when you are not using it.** In Claude Code that is
+`@vimeo` to toggle, and every client has an equivalent.
+
+**Or reach for a shell instead.** A command is not in the context window, so it
+costs nothing on the turns you do not use it. It is not free either: an agent
+still needs the skill file, roughly 1,591 tokens, but only once the subject
+comes up rather than on every turn regardless.
+
+## 7. Tools 🛠️
 
 There are 43 tools, of which 17 are reads, and those are the only ones that
 remain under `VIMEO_READ_ONLY=1`.
@@ -305,7 +328,7 @@ remain under `VIMEO_READ_ONLY=1`.
 | `list_embed_presets` | Your saved player presets |
 | `apply_embed_preset` | Apply one to a video |
 
-## 7. Writing safely ✍️
+## 8. Writing safely ✍️
 
 Writes work by default. Organizing a library is the point of the tool.
 
@@ -336,7 +359,7 @@ whatever reads it. Every comment comes back wrapped and labeled as
 viewer-authored data, which helps and is not a guarantee. For an agent working
 unattended on other people's content, `VIMEO_READ_ONLY=1` is the real defence.
 
-## 8. How Vimeo actually behaves 🎬
+## 9. How Vimeo actually behaves 🎬
 
 **Scopes are frozen at creation.** A token cannot gain a scope later. `delete`
 and `video_files` are both off by default, and Vimeo's 403 does not name the
@@ -372,7 +395,7 @@ it cannot be cached or handed to someone to open later.
 while transcoding continues. Watch `status` on `get_video` until it reads
 `available`.
 
-## 9. This and Vimeo's own connector ⚖️
+## 10. This and Vimeo's own connector ⚖️
 
 Vimeo publishes its own hosted MCP connector at `mcp.vimeo.com`. It is good, it
 is free with a Pro plan, and for a lot of people it is the right choice. Here is
@@ -405,7 +428,7 @@ that is reachable through the public API, so nothing here can match it.
 They are not rivals and nothing stops you running both. Theirs answers what
 happened to a video. This one changes what the library looks like.
 
-## 10. Your data 📂
+## 11. Your data 📂
 
 There is no backend. This server runs on your machine and talks to
 `api.vimeo.com` directly.
@@ -418,7 +441,7 @@ and it is created with `0600` permissions.
 Your token lives wherever you put it, which is your MCP client's config file.
 Nothing else is transmitted anywhere.
 
-## 11. Troubleshooting 🔧
+## 12. Troubleshooting 🔧
 
 Run `doctor` first. It catches most of this.
 
@@ -433,7 +456,7 @@ Run `doctor` first. It catches most of this.
 | `npx` not found in Claude Desktop | Desktop does not inherit your shell PATH. Use the full path from `which npx` |
 | Rate limited on a bulk job | Raise `VIMEO_MIN_REQUEST_INTERVAL_MS`, and pass whole lists rather than looping |
 
-## 12. FAQ ❓
+## 13. FAQ ❓
 
 <details>
 <summary><b>What is an MCP server?</b></summary>
@@ -561,7 +584,7 @@ using it.
 
 </details>
 
-## 13. What changed 📋
+## 14. What changed 📋
 
 Every release is in [CHANGELOG.md](./CHANGELOG.md), newest first.
 
