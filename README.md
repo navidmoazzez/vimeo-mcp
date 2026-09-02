@@ -7,6 +7,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/navidmoazzez/vimeo-mcp/ci.yml?branch=main&label=CI)](https://github.com/navidmoazzez/vimeo-mcp/actions)
 [![YouTube](https://img.shields.io/badge/YouTube-@thenavidm-red?logo=youtube&logoColor=white)](https://youtube.com/@thenavidm?sub_confirmation=1)
 [![X](https://img.shields.io/badge/X-@thenavidm-black?logo=x)](https://x.com/thenavidm)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-thenavidm-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/thenavidm)
 
 Vimeo MCP connects your video library to Claude, Cursor, and any other AI agent.
 It reads transcripts, files videos into folders in bulk, curates showcases,
