@@ -19,18 +19,7 @@ hundreds is hundreds of drags. Here it is one call that takes up to 100 videos.
 
 Built by [Navid Moazzez](https://navid.me?utm_source=github&utm_medium=readme&utm_campaign=vimeo-mcp).
 
-```
-You:    Which videos over 30 minutes have no chapters?
-
-Claude: [list_videos → list_chapters]
-        Six. The longest is "AI Affiliate Marketing Secrets" at 1h 4m.
-        I read its transcript and drafted ten markers. Add them?
-
-You:    Yes, and file all six into Workshops.
-
-Claude: [add_chapter ×10 → add_videos_to_folder]
-        10 chapters added. All six moved in one call.
-```
+<img src="https://cdn.navid.media/repos/vimeo-mcp.gif?v=1" alt="Claude Code using the Vimeo MCP server" width="520">
 
 ## Contents
 
