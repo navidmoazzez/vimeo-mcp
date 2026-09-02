@@ -135,7 +135,7 @@ It returns a video id immediately while transcoding continues. Poll `get_video`
 until `status` reads `available` before you share a link, embed it or add it to
 a showcase.
 
-## Do not approximate what is missing
+## When not to reach for this
 
 The public API has no viewer retention curves, AI video summaries, semantic
 search inside a video, or editing and render pipeline. If the user asks for
