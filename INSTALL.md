@@ -1,4 +1,6 @@
-# Getting a Vimeo token
+# Install
+
+## Getting a Vimeo token
 
 The long version of section 3 of the README.
 
