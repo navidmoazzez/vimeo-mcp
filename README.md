@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue)](./LICENSE)
 [![npm](https://img.shields.io/npm/v/@thenavidm/vimeo-mcp?color=orange&label=npm)](https://www.npmjs.com/package/@thenavidm/vimeo-mcp)
-[![CI](https://img.shields.io/github/actions/workflow/status/navidmoazzez/vimeo-mcp/ci.yml?branch=main&label=CI)](https://github.com/navidmoazzez/vimeo-mcp/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/thenavidm/vimeo-mcp/ci.yml?branch=main&label=CI)](https://github.com/thenavidm/vimeo-mcp/actions)
 [![YouTube](https://img.shields.io/badge/YouTube-@thenavidm-red?logo=youtube&logoColor=white)](https://youtube.com/@thenavidm?sub_confirmation=1)
 [![X](https://img.shields.io/badge/X-@thenavidm-black?logo=x)](https://x.com/thenavidm)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-thenavidm-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/thenavidm)
@@ -580,7 +580,7 @@ Every release is in [CHANGELOG.md](./CHANGELOG.md), newest first.
 ## Questions
 
 Run into a problem or have a question?
-[Open an issue](https://github.com/navidmoazzez/vimeo-mcp/issues) and I will help.
+[Open an issue](https://github.com/thenavidm/vimeo-mcp/issues) and I will help.
 
 ## About the author
 

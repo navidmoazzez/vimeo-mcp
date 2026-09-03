@@ -35,7 +35,7 @@ Options:
   VIMEO_API_VERSION               Vimeo API version, default 3.4
   VIMEO_HTTP_PORT / _HOST / _TOKEN  for --http
 
-https://github.com/navidmoazzez/vimeo-mcp
+https://github.com/thenavidm/vimeo-mcp
 `;
 
 async function main(): Promise<void> {
